@@ -1,0 +1,36 @@
+<script>
+function send_otp(){
+	var email=jQuery('#email').val();
+	jQuery.ajax({
+		url:'send_otp.php',
+		type:'post',
+		data:'email='+email,
+		success:function(result){
+			if(result=='yes'){
+				jQuery('.second_box').show();
+				jQuery('.first_box').hide();
+			}
+			if(result=='not_exist'){
+				jQuery('#email_error').html('Please enter valid email');
+			}
+		}
+	});
+}
+
+function submit_otp(){
+	var otp=jQuery('#otp').val();
+	jQuery.ajax({
+		url:'check_otp.php',
+		type:'post',
+		data:'otp='+otp,
+		success:function(result){
+			if(result=='yes'){
+				window.location='show_msg.php'
+			}
+			if(result=='not_exist'){
+				jQuery('#otp_error').html('Please enter valid otp');
+			}
+		}
+	});
+}
+</script>
